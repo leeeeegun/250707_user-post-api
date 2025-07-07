@@ -1,0 +1,58 @@
+#spring.application.name=demo
+spring:
+  application:
+    name: demo
+  profiles:
+    active: dev
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/relv_db?allowpublickeyretrieval=true&usessl=false&serverTimezone=UTC
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    dialect: org.hibernate.dialect.MySQL8Dialect
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+    # database: mysql
+    database: mysql
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+  api-docs:
+    enabled: true
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+springdoc:
+  swagger-ui:
+    enabled: false
+  api-docs:
+    enabled: false
+
+servlet:
+  encoding:
+    charset: UTF-8
+    enabled: true
+    force: true
